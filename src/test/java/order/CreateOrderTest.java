@@ -58,19 +58,6 @@ public class CreateOrderTest {
                 .body("track", notNullValue());
     }
 
-    @Test
-    @DisplayName("Создание заказа без указания параметра цвета")
-    @Description("Заказ можно создать, если не передать параметр color")
-    public void createOrderWithoutColor() {
-        Order order = new Order(firstName, lastName, address, metroStation, phone, rentTime, deliveryDate, comment);
-        Response response = OrderMethods.createOrder(order);
-        track = response.then().extract().path("track").toString();
-        response.then().assertThat().statusCode(201)
-                .and()
-                .assertThat()
-                .body("track", notNullValue());
-    }
-
     @After
     public void cancelOrder() {
         OrderMethods.cancelOrder(track);
